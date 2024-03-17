@@ -1,6 +1,10 @@
 name: 复制Clash节点文件
 
 on: 
+  push:
+    branches:
+      - main # 监听主分支的推送事件
+      
   schedule:
     - cron: '0 */5 * * *' # 每两个小时执行一次，根据需求调整时间间隔
 
