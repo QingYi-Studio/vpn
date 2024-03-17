@@ -24,7 +24,7 @@ jobs:
       - name: 复制文件
         run: |
           cp clash node/clash
-          
+
       - name: 配置Git
         run: |
           git config --global user.name "QingYi-Studio"
