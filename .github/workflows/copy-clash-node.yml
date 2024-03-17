@@ -5,36 +5,29 @@ on:
     branches:
       - main # 监听主分支的推送事件
       
-  schedule:
-    - cron: '0 */5 * * *' # 每两个小时执行一次，根据需求调整时间间隔
-
 jobs:
   copy_file:
     runs-on: ubuntu-latest
     steps:
-      - name: 检验源仓库
-        uses: actions/checkout@v2
-        with:
-          repository: ripaojiedian/freenode  # 源仓库的所有者和名称
-          ref: main  # 分支名称
+      - name: 下载文件
+        run: |
+          wget -O clash https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash
 
       - name: 构建目录
         run: mkdir -p node/clash
         
       - name: 复制文件
-        run: |
-          cp clash node/clash
+        run: cp clash node/clash
 
       - name: 配置Git
         run: |
           git config --global user.name "QingYi-Studio"
           git config --global user.email "qingyi.studio@gmail.com"
-          git remote set-url origin git@github.com:ripaojiedian/freenode.git
 
       - name: 提交改动
         run: |
           git add .
-          git commit -m "Copy clash file from source repo"
+          git commit -m "Copy file from internet"
           git push origin main
 
       - name: 推送改动
