@@ -25,11 +25,18 @@ jobs:
         run: |
           cp clash node/clash
           
-      - name: 提交并推送改动
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: 配置Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: 提交改动
+        run: |
+          git add .
+          git commit -m "Copy clash file from source repo"
+
+      - name: 推送改动
+        uses: ad-m/github-push-action@master
         with:
-          commit_message: Copy file from source repo
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-          commit_user_name: GitHub Actions
-          commit_user_email: actions@github.com
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
