@@ -29,6 +29,7 @@ jobs:
         run: |
           git config --global user.name "QingYi-Studio"
           git config --global user.email "qingyi.studio@gmail.com"
+          git remote set-url origin git@github.com:ripaojiedian/freenode.git
 
       - name: 提交改动
         run: |
