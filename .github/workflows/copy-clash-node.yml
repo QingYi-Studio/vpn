@@ -34,6 +34,7 @@ jobs:
         run: |
           git add .
           git commit -m "Copy clash file from source repo"
+          git push origin main
 
       - name: 推送改动
         uses: ad-m/github-push-action@master
