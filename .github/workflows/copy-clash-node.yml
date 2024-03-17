@@ -15,11 +15,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create node directory
-        run: mkdir -p ./node  # 创建node文件夹（如果不存在）
+      - name: Create node directory and placeholder file
+        run: |
+          mkdir -p ./node  # 创建node文件夹（如果不存在）
+          touch ./node/.gitkeep  # 在node文件夹中创建占位文件
 
       - name: Download file
-        run: curl -LO https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash  # 要复制的文件的 URL
+        run: curl -LO <URL_OF_FILE_TO_COPY>  # 替换为要复制的文件的 URL
 
       - name: Move file
-        run: mv clash ./node/  # 将文件移动到根目录下的node文件夹中
+        run: mv <FILENAME> ./node/  # 将文件移动到根目录下的node文件夹中
