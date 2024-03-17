@@ -27,4 +27,4 @@ jobs:
         run: mv clash ./node/  # 将文件移动到根目录下的node文件夹中
 
       - name: Sync files to actual repository
-        run: rsync -av --ignore-existing ./node/ $GITHUB_WORKSPACE/node/
+        run: rsync -av --ignore-existing $GITHUB_WORKSPACE/node/ ./node/
