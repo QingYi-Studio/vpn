@@ -25,3 +25,6 @@ jobs:
 
       - name: Move file
         run: mv clash ./node/  # 将文件移动到根目录下的node文件夹中
+
+      - name: Sync files to actual repository
+        run: cp -r node/* $GITHUB_WORKSPACE/node/
