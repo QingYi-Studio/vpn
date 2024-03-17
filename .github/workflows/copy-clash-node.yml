@@ -1,0 +1,28 @@
+name: 复制Clash节点文件
+
+on:
+  schedule:
+    - cron: '0 */5 * * *' # 每两个小时执行一次，根据需求调整时间间隔
+
+jobs:
+  copy_file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Repository
+        uses: actions/checkout@v2
+        with:
+          repository: ripaojiedian/freenode  # 源仓库的所有者和名称
+          ref: main  # 分支名称
+
+      - name: 复制文件
+        run: |
+          cp clash node/clash
+          
+      - name: 提交并推送改动
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Copy file from source repo
+          branch: main
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
