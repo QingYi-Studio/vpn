@@ -15,11 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create node directory and placeholder file
-        run: mkdir -p $GITHUB_WORKSPACE/node && touch $GITHUB_WORKSPACE/node/.gitkeep
-
       - name: Download file
-        run: curl -LO https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash  # 替换为要复制的文件的 URL
+        run: curl -LO https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash
 
-      - name: Move file
-        run: mv clash $GITHUB_WORKSPACE/node/  # 将文件移动到根目录下的node文件夹中
+      - name: Create node directory if not exists
+        run: mkdir -p $GITHUB_WORKSPACE/node
+
+      - name: Move file to node directory
+        run: mv clash $GITHUB_WORKSPACE/node/
