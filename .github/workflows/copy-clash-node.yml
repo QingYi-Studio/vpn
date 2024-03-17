@@ -4,34 +4,19 @@ on:
   push:
     branches:
       - main # 监听主分支的推送事件
-      
+
+  schedule:
+    - cron: '0 * * * *' # 每小时执行一次，可以根据需求调整时间
+   
 jobs:
   copy_file:
     runs-on: ubuntu-latest
     steps:
-      - name: 下载文件
-        run: |
-          wget -O clash https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: 构建目录
-        run: mkdir -p node/clash
-        
-      - name: 复制文件
-        run: cp clash node/clash
+      - name: Download file
+        run: curl -LO https://raw.githubusercontent.com/ripaojiedian/freenode/main/clash  # 替换为要复制的文件的 URL
 
-      - name: 配置Git
-        run: |
-          git config --global user.name "QingYi-Studio"
-          git config --global user.email "qingyi.studio@gmail.com"
-
-      - name: 提交改动
-        run: |
-          git add .
-          git commit -m "Copy file from internet"
-          git push origin main
-
-      - name: 推送改动
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.Admin }}
-          branch: main
+      - name: Move file
+        run: mv clash ./node/  # 将文件移动到根目录下的node文件夹中
